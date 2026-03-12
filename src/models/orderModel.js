@@ -1,16 +1,21 @@
-const mongoose = require("mongoose");
+const { DataTypes } = require("sequelize");
+const sequelize = require("../config/database");
 
-const itemSchema = new mongoose.Schema({
-  productId: Number,
-  quantity: Number,
-  price: Number
+const Order = sequelize.define("Order", {
+
+  orderId: {
+    type: DataTypes.STRING,
+    primaryKey: true
+  },
+
+  value: {
+    type: DataTypes.INTEGER
+  },
+
+  creationDate: {
+    type: DataTypes.DATE
+  }
+
 });
 
-const orderSchema = new mongoose.Schema({
-  orderId: String,
-  value: Number,
-  creationDate: Date,
-  items: [itemSchema]
-});
-
-module.exports = mongoose.model("Order", orderSchema);
+module.exports = Order;
